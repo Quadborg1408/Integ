@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicals & Theater Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- Settings Screen -->
+        <div id="settings">
+            <div class="theater-icon">🎭</div>
+            <h1>Musicals & Theater Quiz</h1>
+            <p class="subtitle">Test your knowledge of the stage!</p>
+
+            <div class="setting-group">
+                <label>Difficulty</label>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+
+            <div class="setting-group">
+                <label>Number of Questions</label>
+                <select id="amount">
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="15">15</option>
+                </select>
+            </div>
+
+            <button id="start-btn" onclick="startQuiz()">Start Quiz 🎬</button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz" style="display:none;">
+            <div class="quiz-header">
+                <span id="question-count"></span>
+                <span id="score">Score: 0</span>
+            </div>
+            <div class="progress-bar">
+                <div id="progress" style="width: 0%;"></div>
+            </div>
+            <div id="question"></div>
+            <div id="answers"></div>
+            <button id="next-btn" style="display:none;" onclick="nextQuestion()">Next Question →</button>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result" style="display:none;">
+            <div class="theater-icon">🏆</div>
+            <h2>Quiz Complete!</h2>
+            <p id="final-score"></p>
+            <p id="final-message"></p>
+            <button onclick="resetQuiz()">Play Again 🎭</button>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
