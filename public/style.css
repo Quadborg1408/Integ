@@ -4,7 +4,6 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    /* This uses a high-res theater image from Unsplash */
     background: linear-gradient(rgba(26, 5, 51, 0.75), rgba(26, 5, 51, 0.75)), 
                 url('https://images.unsplash.com/photo-1503095396549-807059018b0c?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
     background-size: cover;
@@ -17,7 +16,6 @@ body {
 }
 
 .container {
-    /* Glassmorphism effect updated for readability */
     background: rgba(26, 5, 51, 0.75); 
     border: 1px solid rgba(244, 197, 66, 0.3);
     border-radius: 20px;
@@ -29,16 +27,19 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
 }
 
-/* --- New Difficulty Button Group Styles --- */
+/* --- Difficulty Button Group --- */
 .button-group {
     display: flex;
     gap: 10px;
     margin-top: 5px;
 }
 
-.diff-btn {
+/* FIX: Use high-specificity selector so global button rules don't bleed in */
+.button-group .diff-btn {
     flex: 1;
+    width: auto;          /* override global button { width: 100% } */
     padding: 10px;
+    margin-top: 0;        /* override global button { margin-top: 20px } */
     border: 1px solid rgba(244, 197, 66, 0.5);
     background: rgba(255, 255, 255, 0.05);
     color: #fff;
@@ -46,22 +47,23 @@ body {
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
+    font-size: 1em;
     transition: all 0.3s ease;
-    margin-top: 0; /* Reset global button margin */
 }
 
-.diff-btn:hover {
+.button-group .diff-btn:hover {
     background: rgba(244, 197, 66, 0.1);
+    transform: none;      /* prevent global hover translateY from applying */
 }
 
-.diff-btn.active {
+.button-group .diff-btn.active {
     background: #f4c542;
     color: #1a0533;
     font-weight: 600;
     box-shadow: 0 0 15px rgba(244, 197, 66, 0.4);
 }
-/* ------------------------------------------- */
 
+/* --- Icons & Headings --- */
 .theater-icon {
     font-size: 4em;
     text-align: center;
@@ -103,22 +105,7 @@ h2 {
     font-weight: 600;
 }
 
-.setting-group select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.1);
-    color: #fff;
-    font-size: 1em;
-    font-family: 'Poppins', sans-serif;
-}
-
-.setting-group select option {
-    background: #2d0a4e;
-    color: #fff;
-}
-
-/* Global Button (Start Quiz / Play Again) */
+/* --- Global Button (Start Quiz / Play Again) --- */
 button {
     width: 100%;
     padding: 12px;
@@ -139,7 +126,7 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Quiz Header */
+/* --- Quiz Header --- */
 .quiz-header {
     display: flex;
     justify-content: space-between;
@@ -150,7 +137,7 @@ button:hover {
 
 #score { color: #f4c542; font-weight: 600; }
 
-/* Progress Bar */
+/* --- Progress Bar --- */
 .progress-bar {
     background: rgba(255,255,255,0.1);
     border-radius: 10px;
@@ -166,8 +153,8 @@ button:hover {
     transition: width 0.4s ease;
 }
 
-/* Question */
-#question h3 {
+/* --- Question --- */
+#question {
     font-family: 'Playfair Display', serif;
     color: #fff;
     font-size: 1.2em;
@@ -175,12 +162,14 @@ button:hover {
     line-height: 1.6;
 }
 
-/* Answer Buttons */
-.answer-btn {
+/* --- Answer Buttons --- */
+/* FIX: scoped to #answers so global button styles don't interfere */
+#answers button {
     display: block;
     width: 100%;
     padding: 12px 15px;
     margin: 8px 0;
+    margin-top: 0;
     cursor: pointer;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -189,18 +178,24 @@ button:hover {
     color: #fff;
     text-align: left;
     font-family: 'Poppins', sans-serif;
+    font-weight: 400;
     transition: background 0.2s;
 }
 
-.answer-btn:hover:not(:disabled) { background: rgba(255,255,255,0.15); }
-.correct { background: rgba(74, 222, 128, 0.3) !important; border-color: #4ade80 !important; }
-.wrong   { background: rgba(230, 57, 70, 0.3) !important; border-color: #e63946 !important; }
+#answers button:hover:not(:disabled) {
+    background: rgba(255,255,255,0.15);
+    transform: none;
+}
 
-/* Result */
+#answers button.correct { background: rgba(74, 222, 128, 0.3) !important; border-color: #4ade80 !important; color: #fff; }
+#answers button.wrong   { background: rgba(230, 57, 70, 0.3) !important; border-color: #e63946 !important; color: #fff; }
+
+/* --- Result --- */
 #result { text-align: center; }
 #final-score { color: #f4c542; font-size: 1.5em; font-weight: 600; margin: 15px 0; }
 #final-message { color: #ccc; margin-bottom: 10px; }
 
+/* --- Next Button --- */
 #next-btn {
     background: transparent;
     border: 1px solid #f4c542;
@@ -208,4 +203,22 @@ button:hover {
     margin-top: 15px;
 }
 
-#next-btn:hover { background: rgba(244, 197, 66, 0.1); }
+#next-btn:hover {
+    background: rgba(244, 197, 66, 0.1);
+    transform: none;
+}
+
+.back-btn {
+    background: transparent;
+    border: 1px solid rgba(244, 197, 66, 0.4);
+    color: #f4c542;
+    margin-top: 10px;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.back-btn:hover {
+    background: rgba(244, 197, 66, 0.1);
+    transform: translateY(-2px);
+    opacity: 1;
+}

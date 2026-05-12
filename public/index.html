@@ -17,15 +17,16 @@
             <p class="subtitle">Test your knowledge of the stage!</p>
 
             <div class="setting-group">
-    <label>Difficulty</label>
-    <div id="difficulty-options" class="button-group">
-        <button type="button" class="diff-btn" data-value="easy">Easy</button>
-        <button type="button" class="diff-btn active" data-value="medium">Medium</button>
-        <button type="button" class="diff-btn" data-value="hard">Hard</button>
-    </div>
-</div>
+                <label>Difficulty</label>
+                <div id="difficulty-options" class="button-group">
+                    <button type="button" class="diff-btn" data-value="easy">Easy</button>
+                    <button type="button" class="diff-btn active" data-value="medium">Medium</button>
+                    <button type="button" class="diff-btn" data-value="hard">Hard</button>
+                </div>
+            </div>
 
             <button id="start-btn" onclick="startQuiz()">Start Quiz 🎬</button>
+            <button class="back-btn" onclick="window.location.href='mainmenu.html'">← Back to Main Menu</button>
         </div>
 
         <!-- Quiz Screen -->
@@ -49,6 +50,7 @@
             <p id="final-score"></p>
             <p id="final-message"></p>
             <button onclick="resetQuiz()">Play Again 🎭</button>
+            <button class="back-btn" onclick="window.location.href='mainmenu.html'">← Back to Main Menu</button>
         </div>
 
     </div>

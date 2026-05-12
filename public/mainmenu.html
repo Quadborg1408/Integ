@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicals & Theater Quiz – Main Menu</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .menu-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 0;
+            font-size: 1.05em;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .menu-btn.primary {
+            background: #f4c542;
+            color: #1a0533;
+            border: none;
+        }
+
+        .menu-btn.primary:hover {
+            background: #e0b030;
+            transform: translateY(-2px);
+        }
+
+        .menu-btn.secondary {
+            background: transparent;
+            border: 1px solid rgba(244, 197, 66, 0.5);
+            color: #f4c542;
+        }
+
+        .menu-btn.secondary:hover {
+            background: rgba(244, 197, 66, 0.1);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="theater-icon">🎭</div>
+        <h1>Musicals & Theater</h1>
+        <p class="subtitle">Welcome to the stage. What would you like to do?</p>
+
+        <div class="menu-buttons">
+            <button class="menu-btn primary" onclick="window.location.href='index.html'">🎬 Start</button>
+            <button class="menu-btn secondary" onclick="window.location.href='funfacts.html'">💡 Fun Facts</button>
+            <button class="menu-btn secondary" onclick="window.location.href='developers.html'">👥 The Developers</button>
+            <button class="menu-btn secondary" onclick="window.location.href='about.html'">ℹ️ About</button>
+        </div>
+    </div>
+</body>
+</html>
