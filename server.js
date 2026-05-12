@@ -7,7 +7,7 @@ const PORT = 3000;
 app.use(express.static("Public"));
 
 app.get("/api/questions", async (req, res) => {
-    const amount     = req.query.amount || 10;
+    const amount = req.query.amount || 10;
     const difficulty = req.query.difficulty || "medium";
 
     try {

@@ -4,24 +4,63 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #1a0533, #2d0a4e, #1a0533);
+    /* This uses a high-res theater image from Unsplash */
+    background: linear-gradient(rgba(26, 5, 51, 0.75), rgba(26, 5, 51, 0.75)), 
+                url('https://images.unsplash.com/photo-1503095396549-807059018b0c?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
+    background-size: cover;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    margin: 0;
 }
 
 .container {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Glassmorphism effect updated for readability */
+    background: rgba(26, 5, 51, 0.75); 
+    border: 1px solid rgba(244, 197, 66, 0.3);
     border-radius: 20px;
     backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     padding: 40px;
     width: 100%;
     max-width: 600px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
 }
+
+/* --- New Difficulty Button Group Styles --- */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.diff-btn {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid rgba(244, 197, 66, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    margin-top: 0; /* Reset global button margin */
+}
+
+.diff-btn:hover {
+    background: rgba(244, 197, 66, 0.1);
+}
+
+.diff-btn.active {
+    background: #f4c542;
+    color: #1a0533;
+    font-weight: 600;
+    box-shadow: 0 0 15px rgba(244, 197, 66, 0.4);
+}
+/* ------------------------------------------- */
 
 .theater-icon {
     font-size: 4em;
@@ -35,6 +74,7 @@ h1 {
     text-align: center;
     font-size: 2em;
     margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 h2 {
@@ -78,6 +118,7 @@ h2 {
     color: #fff;
 }
 
+/* Global Button (Start Quiz / Play Again) */
 button {
     width: 100%;
     padding: 12px;
@@ -90,10 +131,13 @@ button {
     font-weight: 600;
     color: #1a0533;
     font-family: 'Poppins', sans-serif;
-    transition: background 0.3s;
+    transition: transform 0.2s, background 0.3s;
 }
 
-button:hover { background: #e0b030; }
+button:hover { 
+    background: #e0b030;
+    transform: translateY(-2px);
+}
 
 /* Quiz Header */
 .quiz-header {
