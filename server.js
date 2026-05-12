@@ -6,6 +6,11 @@ const PORT = 3000;
 
 app.use(express.static("Public"));
 
+// Redirect root to home.html
+app.get("/", (req, res) => {
+    res.redirect("/home.html");
+});
+
 app.get("/api/questions", async (req, res) => {
     const amount = req.query.amount || 10;
     const difficulty = req.query.difficulty || "medium";
