@@ -17,24 +17,15 @@
             <p class="subtitle">Test your knowledge of the stage!</p>
 
             <div class="setting-group">
-                <label>Difficulty</label>
-                <select id="difficulty">
-                    <option value="easy">Easy</option>
-                    <option value="medium" selected>Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
-            </div>
+    <label>Difficulty</label>
+    <div id="difficulty-options" class="button-group">
+        <button type="button" class="diff-btn" data-value="easy">Easy</button>
+        <button type="button" class="diff-btn active" data-value="medium">Medium</button>
+        <button type="button" class="diff-btn" data-value="hard">Hard</button>
+    </div>
+</div>
 
-            <div class="setting-group">
-                <label>Number of Questions</label>
-                <select id="amount">
-                    <option value="5">5</option>
-                    <option value="10" selected>10</option>
-                    <option value="15">15</option>
-                </select>
-            </div>
-
-            <button id="start-btn" onclick="startQuiz()">Start Quiz 🎬</button>
+        <button id="start-btn" onclick="startQuiz()">Start Quiz 🎬</button>
         </div>
 
         <!-- Quiz Screen -->
