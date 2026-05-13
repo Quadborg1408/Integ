@@ -4,62 +4,256 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musicals & Theater Quiz – Main Menu</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --gold: #F4D700; 
+            --silver: #E0E0E0;
+            --container-bg: rgba(43, 2, 2, 0.92); 
+            --overlay: rgba(0, 0, 0, 0.75);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000; /* Solid base */
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .homepage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            /* Combined your two backgrounds into one clean layer */
+            background: linear-gradient(var(--overlay), var(--overlay)), url("bg.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .container {
+            background: var(--container-bg); 
+            padding: 4rem 3rem;
+            border-radius: 24px;
+            border: 2px solid rgba(244, 215, 0, 0.5); 
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 
+                        inset 0 0 20px rgba(0,0,0,0.5);
+            text-align: center;
+            max-width: 580px;
+            width: 90%;
+            backdrop-filter: blur(15px);
+            position: relative;
+            opacity: 0; /* Managed by JS */
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(20px);
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .theater-icon {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(0 0 10px var(--gold));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 3.2rem;
+            color: var(--gold);
+            margin-bottom: 8px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--silver);
+            margin-bottom: 45px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
         .menu-buttons {
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            margin-top: 30px;
+            gap: 18px;
         }
 
         .menu-btn {
             width: 100%;
-            padding: 14px;
-            margin-top: 0;
-            font-size: 1.05em;
-            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.95rem;
+            border-radius: 50px;
             cursor: pointer;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Amarante', serif;
             font-weight: 600;
-            transition: transform 0.2s, background 0.3s;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            text-transform: uppercase;
+            letter-spacing: 4px; 
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
         }
 
         .menu-btn.primary {
-            background: #f4c542;
-            color: #1a0533;
-            border: none;
+            background: var(--gold);
+            color: #2b0202; 
+            box-shadow: 0 0 20px rgba(244, 215, 0, 0.2);
         }
 
         .menu-btn.primary:hover {
-            background: #e0b030;
-            transform: translateY(-2px);
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3), 0 0 15px var(--gold);
         }
 
         .menu-btn.secondary {
-            background: transparent;
-            border: 1px solid rgba(244, 197, 66, 0.5);
-            color: #f4c542;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(224, 224, 224, 0.3);
+            color: var(--silver);
         }
 
         .menu-btn.secondary:hover {
-            background: rgba(244, 197, 66, 0.1);
+            background: rgba(224, 224, 224, 0.1);
+            border-color: var(--silver);
+            color: white;
             transform: translateY(-2px);
         }
+
+        /* CURTAIN SYSTEM */
+        #curtainWrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+        }
+
+        .curtain-layer {
+            position: absolute;
+            top: 0;
+            width: 51%;
+            height: 100%;
+            background-color: #4a0000;
+            background-image: repeating-linear-gradient(90deg, #3d0505 0px, #720e0e 50px, #3d0505 100px);
+            transition: transform 1.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .curtain-left { left: 0; transform: translateX(0); border-right: 2px solid rgba(0,0,0,0.3); }
+        .curtain-right { right: 0; transform: translateX(0); border-left: 2px solid rgba(0,0,0,0.3); }
+
+        .curtain-open .curtain-left { transform: translateX(-100%); }
+        .curtain-open .curtain-right { transform: translateX(100%); }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="theater-icon">🎭</div>
-        <h1>Musicals & Theater</h1>
-        <p class="subtitle">Welcome to the stage. What would you like to do?</p>
+    <div id="curtainWrapper">
+        <div class="curtain-layer curtain-left"></div>
+        <div class="curtain-layer curtain-right"></div>
+    </div>
 
-        <div class="menu-buttons">
-            <button class="menu-btn primary" onclick="window.location.href='index.html'">🎬 Start</button>
-            <button class="menu-btn secondary" onclick="window.location.href='funfacts.html'">💡 Fun Facts</button>
-            <button class="menu-btn secondary" onclick="window.location.href='developers.html'">👥 The Developers</button>
-            <button class="menu-btn secondary" onclick="window.location.href='about.html'">ℹ️ About</button>
+    <div class="homepage">
+        <div class="container" id="mainContainer">
+            <div class="theater-icon">🎭</div>
+            <h1>Musicals & Theater</h1>
+            <p class="subtitle">Welcome to the stage. What would you like to do?</p>
+
+            <div class="menu-buttons">
+                <button class="menu-btn primary" onclick="navigateTo('index.html')">🎬 Start</button>
+                <button class="menu-btn secondary" onclick="navigateTo('funfacts.html')">💡 Fun Facts</button>
+                <button class="menu-btn secondary" onclick="navigateTo('developers.html')">👥 The Developers</button>
+                <button class="menu-btn secondary" onclick="navigateTo('about.html')">ℹ️ About</button>
+            </div>
         </div>
     </div>
+
+    <audio id="jhinMusic" loop>
+        <source src="Jhin, the Virtuoso _ Login Screen - League of Legends.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+    const wrapper = document.getElementById('curtainWrapper');
+    const container = document.getElementById('mainContainer');
+    const music = document.getElementById('jhinMusic');
+
+    window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+            music.volume = 0;
+            music.play().catch(e => console.log("User interaction required for music."));
+            
+            let vol = 0;
+            const fadeIn = setInterval(() => {
+                if (vol < 0.35) { 
+                    vol += 0.05;
+                    music.volume = vol;
+                } else {
+                    clearInterval(fadeIn);
+                }
+            }, 100);
+
+            wrapper.classList.add('curtain-open');
+            container.classList.add('visible');
+            
+            setTimeout(() => {
+                wrapper.style.pointerEvents = 'none';
+            }, 1500); 
+        }, 300);
+    });
+
+    function navigateTo(url) {
+        wrapper.style.pointerEvents = 'auto';
+
+        let vol = music.volume;
+        const fadeOut = setInterval(() => {
+            if (vol > 0.05) {
+                vol -= 0.05;
+                music.volume = vol;
+            } else {
+                music.volume = 0;
+                music.pause();
+                clearInterval(fadeOut);
+            }
+        }, 80);
+
+        wrapper.classList.remove('curtain-open');
+        container.classList.remove('visible');
+
+        setTimeout(() => {
+            window.location.href = url;
+        }, 1500);
+    }
+    </script>
 </body>
 </html>

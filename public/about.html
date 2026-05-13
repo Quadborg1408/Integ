@@ -4,17 +4,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About – Musicals & Theater</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #F4D700; 
+            --silver: #E0E0E0;
+            --container-bg: rgba(43, 2, 2, 0.92); 
+            --overlay: rgba(0, 0, 0, 0.75);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            font-family: 'Amarante', serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Prevents scrollbars during curtain animation */
+        }
+
+        .background {
+            position: fixed;
+            top: 0; left: 0;
+            height: 100vh; width: 100vw;
+            background: linear-gradient(var(--overlay), var(--overlay)), url("theater_bg.png");
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .container {
+            background: var(--container-bg); 
+            padding: 4rem 3rem; 
+            border-radius: 24px;
+            border: 2.0px solid rgba(244, 215, 0, 0.5); 
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 
+                        inset 0 0 20px rgba(0,0,0,0.5);
+            text-align: center;
+            max-width: 800px; width: 90%; 
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 5;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .theater-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px var(--gold));
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+        }
+
+        .about-text {
+            color: white;
+            font-family: 'Amarante', serif;
+            line-height: 1.6; 
+            font-size: 1rem; 
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(224, 224, 224, 0.3);
+            color: var(--silver);
+            padding: 14px 35px;
+            font-size: 0.85rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Amarante', serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #2b0202;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        /* Curtain Animation Styles */
+        #curtainWrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .curtain-layer {
+            position: absolute;
+            top: 0;
+            width: 51%;
+            height: 100%;
+            background-color: #4a0000;
+            background-image: repeating-linear-gradient(90deg, #3d0505 0px, #720e0e 50px, #3d0505 100px);
+            transition: transform 1.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        }
+
+        .curtain-left { left: 0; border-right: 2px solid rgba(0,0,0,0.3); }
+        .curtain-right { right: 0; border-left: 2px solid rgba(0,0,0,0.3); }
+
+        .curtain-open .curtain-left { transform: translateX(-100%); }
+        .curtain-open .curtain-right { transform: translateX(100%); }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="theater-icon">ℹ️</div>
-        <h1>About</h1>
-        <p class="subtitle">Learn more about this project.</p>
 
-        <!-- Add your about content here -->
+    <!-- Audio Element -->
+    <audio id="aboutMusic" loop>
+        <source src="Diva Dance from The Fifth Element.Full version..mp3" type="audio/mpeg">
+    </audio>
 
-        <button class="back-btn" onclick="window.location.href='mainmenu.html'">← Back to Main Menu</button>
+    <!-- Curtain Wrapper -->
+    <div id="curtainWrapper">
+        <div class="curtain-layer curtain-left"></div>
+        <div class="curtain-layer curtain-right"></div>
     </div>
+
+    <div class="background"></div>
+
+    <div class="container" id="mainContainer">
+        <span class="theater-icon">🎭</span>
+        <h1>Learn More About This Project</h1>
+
+        <div class="about-text">
+            Behind the elegant curtains and the gold-trimmed interface of this application lies a robust technical architecture centered on modern 
+            web development practices. Our team chose to utilize Node.js as the primary backend environment to serve as the "Stage Manager" of the 
+            entire production. Unlike traditional setups that might rely on static content, Node.js allows our application to operate as a dynamic, 
+            event-driven system. It effectively handles the communication between the user's browser and the external data sources we rely on, ensuring 
+            that every "performance"—or quiz session—is fast, responsive, and seamless. 
+            <br><br>The true strength of using Node.js in this project is its ability to facilitate real-time interactions without the need for a complex, 
+            self-hosted database. Instead of storing hundreds of questions manually, we integrated the Open Trivia Database (OpenTDB) via its API. 
+            Node.js acts as the vital bridge in this process; it sends requests to the OpenTDB library, fetches the theatrical trivia, and delivers it 
+            instantly to the frontend.
+        </div>
+
+        <button class="back-btn" onclick="triggerExit('mainmenu.html')">
+            ← Back to Menu
+        </button>
+    </div>
+
+    <script>
+        const wrapper = document.getElementById('curtainWrapper');
+        const container = document.getElementById('mainContainer');
+        const aboutMusic = document.getElementById('aboutMusic');
+
+        // Opening sequence
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                wrapper.classList.add('curtain-open');
+                container.classList.add('visible');
+                aboutMusic.play().catch(() => console.log("Music play blocked until user interaction."));
+            }, 300);
+        });
+
+        // Closing sequence with volume fade
+        function triggerExit(url) {
+            wrapper.style.pointerEvents = 'auto';
+            wrapper.classList.remove('curtain-open');
+            container.classList.remove('visible');
+
+            let fadeInterval = setInterval(() => {
+                if (aboutMusic.volume > 0.1) {
+                    aboutMusic.volume -= 0.1;
+                } else {
+                    aboutMusic.pause();
+                    clearInterval(fadeInterval);
+                    window.location.href = url;
+                }
+            }, 100);
+        }
+    </script>
 </body>
 </html>

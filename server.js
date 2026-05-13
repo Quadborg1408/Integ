@@ -4,7 +4,7 @@ const fetch = (...args) => import("node-fetch").then(({default: fetch}) => fetch
 const app = express();
 const PORT = 3000;
 
-app.use(express.static("Public"));
+app.use(express.static("Public", { index: false }));
 
 // Redirect root to home.html
 app.get("/", (req, res) => {

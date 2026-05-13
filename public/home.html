@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <title>Musical and Theatres</title>
+    <!-- Keep your links here -->
+    <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #F4D700;
@@ -20,14 +21,15 @@
 
         body {
             background-color: #000;
-            font-family: 'Poppins', sans-serif;
+            /* Changed base font to Amarante to help with inheritance */
+            font-family: 'Amarante', serif;
             overflow: hidden;
         }
 
         .homepage {
             height: 100vh;
             width: 100%;
-            background-image: url("theater_bg.png"); 
+            background-image: url("bg.png"); 
             background-size: cover;
             background-position: center;
             display: flex;
@@ -36,13 +38,10 @@
             position: relative;
         }
 
-        /* Overlay para sa vignette effect */
         .vignette {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: radial-gradient(transparent, rgba(0,0,0,0.6));
             pointer-events: none;
         }
@@ -54,6 +53,7 @@
         }
 
         .title {
+            /* Applied Playfair Display here */
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 8vw, 5rem);
             color: var(--gold);
@@ -65,6 +65,8 @@
 
         /* Animated Enter Button */
         .enter-btn {
+            /* FORCE the font here because buttons ignore body font-family */
+            font-family: 'Amarante', serif; 
             background: rgba(255, 255, 255, 0.1);
             color: white;
             border: 2px solid var(--silver);
@@ -81,7 +83,7 @@
 
         .enter-btn:hover {
             background: var(--gold);
-            color: var(--deep-red);
+            color: #2b0202; /* Dark color for contrast */
             border-color: var(--gold);
             transform: scale(1.1);
             box-shadow: 0 0 30px var(--gold);
@@ -90,7 +92,7 @@
         .curtain-layer {
             position: fixed;
             top: 0;
-            width: 51%; /* May konting overlap sa gitna */
+            width: 51%;
             height: 100%;
             background-color: #4a0000;
             background-image: repeating-linear-gradient(90deg, #3d0505 0px, #720e0e 50px, #3d0505 100px);
@@ -99,30 +101,22 @@
             box-shadow: 0 0 50px rgba(0,0,0,0.5);
         }
 
-        .curtain-left {
-            left: 0;
-            transform: translateX(-100%); /* Naka-tago sa simula */
-        }
-
-        .curtain-right {
-            right: 0;
-            transform: translateX(100%); /* Naka-tago sa simula */
-        }
+        .curtain-left { left: 0; transform: translateX(-100%); }
+        .curtain-right { right: 0; transform: translateX(100%); }
 
         .curtain-active .curtain-left,
-        .curtain-active .curtain-right {
-            transform: translateX(0);
-        }
+        .curtain-active .curtain-right { transform: translateX(0); }
 
         .loading-text {
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             color: var(--gold);
             z-index: 1000;
             font-size: 2rem;
             display: none;
+            /* Applied Playfair for the loading text too */
+            font-family: 'Playfair Display', serif;
             text-transform: uppercase;
             letter-spacing: 5px;
         }
@@ -130,14 +124,12 @@
 </head>
 <body>
 
-    <!-- Animating Curtains -->
     <div id="curtainWrapper">
         <div class="curtain-layer curtain-left"></div>
         <div class="curtain-layer curtain-right"></div>
-        <div class="loading-text" id="loader">Loading...</div>
+        <div class="loading-text" id="loader"></div>
     </div>
 
-    <!-- Homepage Content -->
     <div class="homepage">
         <div class="vignette"></div>
         <div class="content" id="mainContent">
@@ -145,18 +137,12 @@
             <button class="enter-btn" onclick="closeCurtain()">ENTER</button>
         </div>
     </div>
+
     <script>
         function closeCurtain() {
-            // I-trigger ang animation
             document.body.classList.add('curtain-active');
-
-            // I-hide ang title at button habang nagsasara
             document.getElementById('mainContent').style.opacity = '0';
-
-            // Wait for 1.5 seconds (duration ng animation) bago lumipat
-
             setTimeout(function() {
-
                 document.getElementById('loader').style.display = 'block';
                 window.location.href = "mainmenu.html"; 
             }, 1500);
