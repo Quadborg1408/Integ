@@ -27,7 +27,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Prevents scrollbars during curtain animation */
+            overflow: hidden;
         }
 
         .background {
@@ -137,13 +137,10 @@
     </style>
 </head>
 <body>
-
-    <!-- Audio Element -->
     <audio id="aboutMusic" loop>
         <source src="Diva Dance from The Fifth Element.Full version..mp3" type="audio/mpeg">
     </audio>
 
-    <!-- Curtain Wrapper -->
     <div id="curtainWrapper">
         <div class="curtain-layer curtain-left"></div>
         <div class="curtain-layer curtain-right"></div>
@@ -177,7 +174,6 @@
         const container = document.getElementById('mainContainer');
         const aboutMusic = document.getElementById('aboutMusic');
 
-        // Opening sequence
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 wrapper.classList.add('curtain-open');
@@ -186,7 +182,6 @@
             }, 300);
         });
 
-        // Closing sequence with volume fade
         function triggerExit(url) {
             wrapper.style.pointerEvents = 'auto';
             wrapper.classList.remove('curtain-open');

@@ -89,6 +89,15 @@
         .curtain-right { right: 0; border-left: 2px solid rgba(0,0,0,0.3); }
         .curtain-open .curtain-left { transform: translateX(-100%); }
         .curtain-open .curtain-right { transform: translateX(100%); }
+
+        .result {
+            width: 100%; padding: 16px;
+            background: var(--gold); color: #2b0202;
+            border: none; border-radius: 50px;
+            font-family: 'Amarante', serif; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 4px;
+            cursor: pointer; transition: 0.4s;
+        }
     </style>
 </head>
 <body>
@@ -121,11 +130,20 @@
                 <div id="answers"></div>
             </div>
 
-            <div id="result" style="display:none;">
-                <h2>Curtain Call</h2>
-                <p id="final-score" style="color: var(--gold); font-size: 2.2rem; margin: 15px 0;"></p>
-                <button class="primary-btn" onclick="playAgain()">Play Again 🎭</button>
-                <button class="back-btn" onclick="triggerExit('mainmenu.html')">← Back to Main Menu</button>
+            <div id="result" style="display:none; text-align: center;">
+                 <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); font-size: 3rem; font-style: italic; margin-bottom: 10px;">
+                    Results
+                </h2>
+
+                <p id="final-score" style="color: var(--gold); font-size: 2.2rem; margin: 15px 0; font-family: 'Amarante', serif;"></p>
+    
+                <button class="primary-btn" onclick="playAgain()" style="font-family: 'Amarante', serif; margin-bottom: 10px;">
+                    Play Again 🎭
+                </button>
+                <br>
+                <button class="back-btn" onclick="triggerExit('mainmenu.html')" style="font-family: 'Amarante', serif;">
+                    ← Back to Main Menu
+                </button>
             </div>
         </div>
     </div>
@@ -140,23 +158,20 @@
         const container = document.getElementById('mainContainer');
         const theatreSfx = document.getElementById('theatreSfx');
 
-        // Opening curtains and starting music
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 wrapper.classList.add('curtain-open');
                 container.classList.add('visible');
-                // Try to play immediately (might be blocked until first click)
                 theatreSfx.play().catch(() => console.log("Music waiting for interaction."));
             }, 300);
         });
 
-        // Fades out music and closes curtains before leaving
+
         function triggerExit(url) {
             wrapper.style.pointerEvents = 'auto';
             wrapper.classList.remove('curtain-open');
             container.classList.remove('visible');
 
-            // Audio Fade Out
             let fadeInterval = setInterval(() => {
                 if (theatreSfx.volume > 0.1) {
                     theatreSfx.volume -= 0.1;
@@ -175,7 +190,6 @@
         }
 
         async function fetchAndStart() {
-            // Ensure music is playing (in case it was blocked on load)
             theatreSfx.play();
             
             const btn = document.getElementById('startBtn');
@@ -218,7 +232,6 @@
         }
 
         function playAgain() {
-            // Music keeps playing, just reset UI
             document.getElementById('result').style.display = 'none';
             document.getElementById('settings').style.display = 'block';
             document.getElementById('startBtn').innerText = "Start Quiz 🎬";

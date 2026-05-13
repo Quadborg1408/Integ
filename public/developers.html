@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Developers – Musicals & Theater</title>
     
-    <!-- Unified Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -27,7 +26,7 @@
             font-family: 'Amarante', serif;
             overflow-x: hidden;
             color: white;
-            text-align: center; /* Global center alignment */
+            text-align: center;
         }
 
         .page-wrapper {
@@ -52,7 +51,6 @@
             pointer-events: none;
         }
 
-        /* Curtain System */
         .curtain-layer {
             position: fixed;
             top: 0;
@@ -98,7 +96,6 @@
             text-transform: uppercase;
         }
 
-        /* Centered Dev Cards */
         .dev-grid { 
             display: flex; 
             flex-direction: column; 
@@ -114,7 +111,7 @@
             width: 100%;
             max-width: 500px;
             display: flex; 
-            flex-direction: column; /* Stacked vertically */
+            flex-direction: column;
             align-items: center; 
             gap: 15px; 
             cursor: pointer; 
@@ -139,7 +136,6 @@
             box-shadow: 0 0 15px rgba(244, 215, 0, 0.2);
         }
 
-        /* Detail View - Centered */
         #detail-view { display: none; animation: fadeIn 0.8s ease; }
         
         .expanded-photo { 
@@ -157,8 +153,8 @@
             border-radius: 20px; 
             margin: 25px 0; 
             line-height: 1.8; 
-            text-align: center; /* Centered bio text */
-            border-bottom: 4px solid var(--gold); /* Border moved to bottom */
+            text-align: center; 
+            border-bottom: 4px solid var(--gold);
             color: #eee;
             font-size: 1.1rem;
         }
@@ -175,14 +171,13 @@
             text-transform: uppercase;
         }
 
-        /* Spotify Player - Centered Layout */
         .spotify-footer {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid var(--silver);
             padding: 20px;
             border-radius: 60px;
             display: flex;
-            flex-direction: column; /* Centered stack */
+            flex-direction: column;
             align-items: center;
             gap: 15px;
             margin: 30px auto;
@@ -220,8 +215,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Curtain Layers -->
     <div id="curtain-l" class="curtain-layer curtain-left"></div>
     <div id="curtain-r" class="curtain-layer curtain-right"></div>
 
@@ -232,7 +225,6 @@
             <h1 class="title" id="main-title">The Developers</h1>
             <p class="subtitle" id="main-subtitle">The creative minds behind the curtain</p>
 
-            <!-- LIST VIEW -->
             <div id="list-view" class="dev-grid">
                 <div class="dev-card" onclick="showDetail(1)">
                     <img src="collado.png" class="dev-photo-sm">
@@ -259,7 +251,6 @@
                 </div>
             </div>
 
-            <!-- DETAIL VIEW -->
             <div id="detail-view">
                 <img id="det-img" src="" class="expanded-photo">
                 <h2 id="det-name" class="title" style="font-size: 3rem; margin: 0;"></h2>
@@ -293,12 +284,10 @@
     <audio id="dev-music" loop></audio>
 
     <script>
-        // Opening curtains on load
         window.onload = () => {
             document.body.classList.add('loaded');
         };
 
-        // Closing curtains then navigating
         function closeAndNavigate(url) {
             document.body.classList.remove('loaded');
             setTimeout(() => {

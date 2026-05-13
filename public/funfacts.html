@@ -80,7 +80,6 @@
         }
         .back-btn:hover { opacity: 1; color: white; }
 
-        /* Curtains */
         #curtainWrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none; }
         .curtain-layer {
             position: absolute; top: 0; width: 51%; height: 100%;
@@ -120,7 +119,6 @@
     </div>
 
     <script>
-        // High-quality theater facts library
         const theaterFacts = [
             "The tradition of the 'Ghost Light'—leaving a single bulb burning on stage at night—is meant to keep the theater's ghosts happy and safe.",
             "The longest-running Broadway musical is 'The Phantom of the Opera', which opened in 1988 and played over 13,000 performances.",
@@ -159,7 +157,6 @@
 
             setTimeout(() => {
                 let randomIndex;
-                // Avoid repeating the same fact twice in a row
                 do {
                     randomIndex = Math.floor(Math.random() * theaterFacts.length);
                 } while (randomIndex === lastIndex);

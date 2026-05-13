@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Musical and Theatres</title>
-    <!-- Keep your links here -->
     <link href="https://fonts.googleapis.com/css2?family=Amarante&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -21,7 +20,6 @@
 
         body {
             background-color: #000;
-            /* Changed base font to Amarante to help with inheritance */
             font-family: 'Amarante', serif;
             overflow: hidden;
         }
@@ -53,7 +51,6 @@
         }
 
         .title {
-            /* Applied Playfair Display here */
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 8vw, 5rem);
             color: var(--gold);
@@ -63,9 +60,7 @@
             line-height: 1.1;
         }
 
-        /* Animated Enter Button */
         .enter-btn {
-            /* FORCE the font here because buttons ignore body font-family */
             font-family: 'Amarante', serif; 
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -83,7 +78,7 @@
 
         .enter-btn:hover {
             background: var(--gold);
-            color: #2b0202; /* Dark color for contrast */
+            color: #2b0202;
             border-color: var(--gold);
             transform: scale(1.1);
             box-shadow: 0 0 30px var(--gold);
@@ -115,7 +110,6 @@
             z-index: 1000;
             font-size: 2rem;
             display: none;
-            /* Applied Playfair for the loading text too */
             font-family: 'Playfair Display', serif;
             text-transform: uppercase;
             letter-spacing: 5px;
